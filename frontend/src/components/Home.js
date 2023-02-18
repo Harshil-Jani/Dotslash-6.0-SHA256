@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { ethers } from 'ethers';
 import abi from "../utils/Museum.json";
-import Website from "../config.json";
 
 const artifact_data = [
     {
@@ -31,10 +29,19 @@ const artifact_data = [
 ];
 
 export default function () {
-    const [content, setContent] = useState(null);
-    const [artifactData,setArtifactData] = useState([])
+    const [title, setTitle] = useState("");
+    const [name, setName] = useState("");
+    const [museum, setMuseum] = useState("");
+    const [owner, setOwner] = useState("");
+    const [description, setDescription] = useState("");
+    const [artifactData, setArtifactData] = useState([]);
+
     const handleClick = (index, item) => {
-        setContent(JSON.stringify(item, null, 4));
+        setTitle(item.title);
+        setName(item.name);
+        setMuseum(item.museum);
+        setOwner(item.owner);
+        setDescription(item.description);
         setOpen(true);
     }
     const [open, setOpen] = useState(false);
@@ -53,7 +60,7 @@ export default function () {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner();
             const artifactContract = new ethers.Contract("0x38F33B552a5992CcBd993e123d25A8De981479F9", abi.abi, signer);
-            
+
             // artifactContract.createartifact("Ayush", "SVNIT Museum", "Contract Testing", "Description coming soon", "Lop");
             //
             const data = await artifactContract.getartifacts();
@@ -84,11 +91,19 @@ export default function () {
 
             >
                 <Box className='modal-style'>
-                    <h1 id="modal-modal-title" variant="h6" component="h2">
-                        {/* {JSON.parse(content)?.image}
-                        {JSON.parse(content)?.description} */}
-                        {JSON.stringify(content)}
+                    <img height={300} width={300} src="https://bafybeid6chs4sdsn7vkghbsgi5lbspx5cinbt6sbfn6vnfdl7iuvgiulga.ipfs.nftstorage.link/"/>
+                    <h1>
+                        {title}
                     </h1>
+                    <h2>
+                        {name}
+                    </h2>
+                    <h3>
+                        {description}
+                    </h3>
+                    <h4>
+                        {museum}
+                    </h4>
                     <Button variant='contained' className='donate' onClick={handleDonation}>Donate</Button>
                 </Box>
             </Modal>
