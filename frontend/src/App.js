@@ -7,7 +7,7 @@ function App() {
   const [walletConnect, setWalletConnect] = useState(null);
   const [action,setAction] = useState(<Home/>);
   return (
-    <>
+    <div className='webbody'>
       <Navbar setWalletConnect={setWalletConnect} setAction={setAction}/>
       {
         !walletConnect ?
@@ -17,7 +17,7 @@ function App() {
             {action}
           </div>
       }
-    </>
+    </div>
   );
 }
 

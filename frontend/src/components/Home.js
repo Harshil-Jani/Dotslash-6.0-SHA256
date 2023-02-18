@@ -69,7 +69,7 @@ export default function () {
             <div className="artifact-data">
                 {artifactData.map((item, index) => (
                     <div key={index} className="card">
-                        <img src={"https://bafybeid6chs4sdsn7vkghbsgi5lbspx5cinbt6sbfn6vnfdl7iuvgiulga.ipfs.nftstorage.link/"} width={200} height={300} alt={item.category} />
+                        <img src={"https://bafybeid6chs4sdsn7vkghbsgi5lbspx5cinbt6sbfn6vnfdl7iuvgiulga.ipfs.nftstorage.link/"} width={300} height={300} alt={item.category} />
                         <h2>{item.title}</h2>
                         <p>{item.description}</p>
                         <button onClick={() => handleClick(index, item)}>View More</button>
