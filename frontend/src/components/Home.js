@@ -166,9 +166,9 @@ export default function () {
                 
             >
                 <Box className='modal-style'>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        {content}
-                    </Typography>
+                    <pre id="modal-modal-title" variant="h6" component="h2">
+                        {JSON.parse(content)?.image}
+                    </pre>
                 </Box>
             </Modal>
         </div>
