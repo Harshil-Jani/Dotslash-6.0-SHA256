@@ -1,7 +1,9 @@
 export default function () {
-    return(
-        <h1>
-            Owned
-        </h1>
+    return (
+        <div className="home">
+            <h1>
+                You don't Own any NFT
+            </h1>
+        </div>
     )
 }
