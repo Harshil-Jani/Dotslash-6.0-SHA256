@@ -92,11 +92,10 @@ button.form-submit {
 button.form-submit:hover {
   background-color: #3e8e41;
 }
-
-.arm-armour,
-.anthropology,
-.manuscript,
-.jewellery {
+.catagories{
+  margin: 20px;
+}
+.artifact-data{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

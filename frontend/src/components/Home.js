@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-const arms_and_armour = [
+import { ethers } from 'ethers';
+import abi from "../utils/Museum.json";
+import Website from "../config.json";
+
+const artifact_data = [
     {
         category: 'Item1',
         image: 'https://dummyimage.com/300x200/000/fff.png',
@@ -26,78 +30,11 @@ const arms_and_armour = [
     },
 ];
 
-const manuscript = [
-    {
-        category: 'Item1',
-        image: 'https://dummyimage.com/300x200/000/fff.png',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, tortor et convallis placerat, nisi nulla ornare urna, quis accumsan nisl purus eget mi.'
-    },
-    {
-        category: 'Item2',
-        image: 'https://dummyimage.com/300x200/000/fff.png',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, tortor et convallis placerat, nisi nulla ornare urna, quis accumsan nisl purus eget mi.'
-    },
-    {
-        category: 'Item3',
-        image: 'https://dummyimage.com/300x200/000/fff.png',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, tortor et convallis placerat, nisi nulla ornare urna, quis accumsan nisl purus eget mi.'
-    },
-    {
-        category: 'Item4',
-        image: 'https://dummyimage.com/300x200/000/fff.png',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, tortor et convallis placerat, nisi nulla ornare urna, quis accumsan nisl purus eget mi.'
-    },
-];
-
-const jewellery = [
-    {
-        category: 'Item1',
-        image: 'https://dummyimage.com/300x200/000/fff.png',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, tortor et convallis placerat, nisi nulla ornare urna, quis accumsan nisl purus eget mi.'
-    },
-    {
-        category: 'Item2',
-        image: 'https://dummyimage.com/300x200/000/fff.png',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, tortor et convallis placerat, nisi nulla ornare urna, quis accumsan nisl purus eget mi.'
-    },
-    {
-        category: 'Item3',
-        image: 'https://dummyimage.com/300x200/000/fff.png',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, tortor et convallis placerat, nisi nulla ornare urna, quis accumsan nisl purus eget mi.'
-    },
-    {
-        category: 'Item4',
-        image: 'https://dummyimage.com/300x200/000/fff.png',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, tortor et convallis placerat, nisi nulla ornare urna, quis accumsan nisl purus eget mi.'
-    },
-];
-
-const anthropology = [
-    {
-        category: 'Item1',
-        image: 'https://dummyimage.com/300x200/000/fff.png',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, tortor et convallis placerat, nisi nulla ornare urna, quis accumsan nisl purus eget mi.'
-    },
-    {
-        category: 'Item2',
-        image: 'https://dummyimage.com/300x200/000/fff.png',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, tortor et convallis placerat, nisi nulla ornare urna, quis accumsan nisl purus eget mi.'
-    },
-    {
-        category: 'Item3',
-        image: 'https://dummyimage.com/300x200/000/fff.png',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, tortor et convallis placerat, nisi nulla ornare urna, quis accumsan nisl purus eget mi.'
-    },
-    {
-        category: 'Item4',
-        image: 'https://dummyimage.com/300x200/000/fff.png',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, tortor et convallis placerat, nisi nulla ornare urna, quis accumsan nisl purus eget mi.'
-    },
-];
 export default function () {
     const [content, setContent] = useState(null);
+    const [artifactData,setArtifactData] = useState([])
     const handleClick = (index, item) => {
-        setContent(JSON.stringify(item,null,4));
+        setContent(JSON.stringify(item, null, 4));
         setOpen(true);
     }
     const [open, setOpen] = useState(false);
@@ -109,54 +46,31 @@ export default function () {
     const handleDonation = () => {
         console.log("Donated Bitch");
     }
+
+    const artifact = async () => {
+        const { ethereum } = window;
+        if (ethereum) {
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            const signer = provider.getSigner();
+            const artifactContract = new ethers.Contract("0x38F33B552a5992CcBd993e123d25A8De981479F9", abi.abi, signer);
+            
+            // artifactContract.createartifact("Ayush", "SVNIT Museum", "Contract Testing", "Description coming soon", "Lop");
+            //
+            const data = await artifactContract.getartifacts();
+            console.log(data[0].owner);
+            setArtifactData(data);
+        }
+    }
+    useEffect(() => {
+        artifact();
+    }, []);
     return (
         <div className='catagories'>
-            <h1 className='catagorie-heading'>Arms and Armour</h1>
-            <hr />
-            <div className="arm-armour">
-                {arms_and_armour.map((item, index) => (
+            <div className="artifact-data">
+                {artifactData.map((item, index) => (
                     <div key={index} className="card">
-                        <img src={item.image} alt={item.category} />
-                        <h2>{item.category}</h2>
-                        <p>{item.description}</p>
-                        <button onClick={() => handleClick(index, item)}>View More</button>
-                    </div>
-                ))}
-            </div>
-
-            <h1 className='catagorie-heading'>Anthropology</h1>
-            <hr />
-            <div className="anthropology">
-                {anthropology.map((item, index) => (
-                    <div key={index} className="card">
-                        <img src={item.image} alt={item.category} />
-                        <h2>{item.category}</h2>
-                        <p>{item.description}</p>
-                        <button onClick={() => handleClick(index, item)}>View More</button>
-                    </div>
-                ))}
-            </div>
-
-            <h1 className='catagorie-heading'>Manuscript</h1>
-            <hr />
-            <div className="manuscript">
-                {manuscript.map((item, index) => (
-                    <div key={index} className="card">
-                        <img src={item.image} alt={item.category} />
-                        <h2>{item.category}</h2>
-                        <p>{item.description}</p>
-                        <button onClick={() => handleClick(index, item)}>View More</button>
-                    </div>
-                ))}
-            </div>
-
-            <h1 className='catagorie-heading'>Jewellery</h1>
-            <hr />
-            <div className="jewellery">
-                {jewellery.map((item, index) => (
-                    <div key={index} className="card">
-                        <img src={item.image} alt={item.category} />
-                        <h2>{item.category}</h2>
+                        <img src={"https://bafybeid6chs4sdsn7vkghbsgi5lbspx5cinbt6sbfn6vnfdl7iuvgiulga.ipfs.nftstorage.link/"} width={200} height={300} alt={item.category} />
+                        <h2>{item.title}</h2>
                         <p>{item.description}</p>
                         <button onClick={() => handleClick(index, item)}>View More</button>
                     </div>
@@ -167,13 +81,13 @@ export default function () {
                 onClose={closeModal}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
-                
+
             >
                 <Box className='modal-style'>
                     <h1 id="modal-modal-title" variant="h6" component="h2">
                         {/* {JSON.parse(content)?.image}
                         {JSON.parse(content)?.description} */}
-                        {JSON.parse(content)?.category}
+                        {JSON.stringify(content)}
                     </h1>
                     <Button variant='contained' className='donate' onClick={handleDonation}>Donate</Button>
                 </Box>
