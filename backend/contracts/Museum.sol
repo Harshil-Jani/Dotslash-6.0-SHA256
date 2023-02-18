@@ -8,6 +8,7 @@ contract Museum {
         string museum;
         string title;
         string description;
+        // string category;
         uint256 amountCollected;
         string image;
         address[] donators;
@@ -18,7 +19,7 @@ contract Museum {
 
     uint256 public numberOfartifacts = 0;
 
-    function createartifact(address _owner, string memory _name,  string memory _title, string memory _description, string memory _image) public returns (uint256) {
+    function createartifact(address _owner, string memory _name, string memory _museum, string memory _title, string memory _description, string memory _image) public returns (uint256) {
         Artifact storage artifact = artifacts[numberOfartifacts];
 
         // require(artifact.deadline < block.timestamp, "The deadline should be a date in the future.");
@@ -27,6 +28,8 @@ contract Museum {
         artifact.name = _name;
         artifact.title = _title;
         artifact.description = _description;
+        // artifact.category = _category;
+        artifact.museum = _museum;
         // artifact.target = _target;
         // artifact.deadline = _deadline;
         artifact.amountCollected = 0;
