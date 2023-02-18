@@ -105,6 +105,10 @@ export default function () {
     const closeModal = () => {
         setOpen(false);
     };
+
+    const handleDonation = () => {
+        console.log("Donated Bitch");
+    }
     return (
         <div className='catagories'>
             <h1 className='catagorie-heading'>Arms and Armour</h1>
@@ -166,9 +170,12 @@ export default function () {
                 
             >
                 <Box className='modal-style'>
-                    <pre id="modal-modal-title" variant="h6" component="h2">
-                        {JSON.parse(content)?.image}
-                    </pre>
+                    <h1 id="modal-modal-title" variant="h6" component="h2">
+                        {/* {JSON.parse(content)?.image}
+                        {JSON.parse(content)?.description} */}
+                        {JSON.parse(content)?.category}
+                    </h1>
+                    <Button variant='contained' className='donate' onClick={handleDonation}>Donate</Button>
                 </Box>
             </Modal>
         </div>

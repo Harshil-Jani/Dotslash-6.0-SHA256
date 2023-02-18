@@ -40,7 +40,7 @@ const Navbar = ({ setWalletConnect, setAction }) => {
     return (
         <div className="main_nav">
             <div className="nav_title">
-                <h1>Museum Artifact</h1>
+                <h1>Museum Artifact MarketPlace</h1>
                 <button
                     className={`nav-button`}
                     onClick={() => handleButtonClick("create")}
