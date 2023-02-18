@@ -4,6 +4,8 @@ pragma solidity ^0.8.9;
 contract Museum {
     struct Artifact {
         address owner;
+        string name;
+        string museum;
         string title;
         string description;
         uint256 amountCollected;
@@ -16,12 +18,13 @@ contract Museum {
 
     uint256 public numberOfartifacts = 0;
 
-    function createartifact(address _owner, string memory _title, string memory _description, string memory _image) public returns (uint256) {
+    function createartifact(address _owner, string memory _name, string memory _museum, string memory _title, string memory _description, string memory _image) public returns (uint256) {
         Artifact storage artifact = artifacts[numberOfartifacts];
 
         // require(artifact.deadline < block.timestamp, "The deadline should be a date in the future.");
 
         artifact.owner = _owner;
+        artifact.name = _name;
         artifact.title = _title;
         artifact.description = _description;
         // artifact.target = _target;
@@ -39,6 +42,7 @@ contract Museum {
 
         Artifact storage artifact = artifacts[_id];
 
+        require(artifact.donations.length < 3);
         artifact.donators.push(msg.sender);
         artifact.donations.push(amount);
 
