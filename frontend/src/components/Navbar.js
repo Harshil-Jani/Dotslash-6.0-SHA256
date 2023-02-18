@@ -15,9 +15,9 @@ const Navbar = ({ setWalletConnect, setAction }) => {
             setAction(<Create />);
         }
         else if (buttonName == "owned") {
-            setAction(<Owned />);
+            setAction(<Home />);
         }else if (buttonName == "home") {
-            setAction(<Home/>);
+            setAction(<Owned/>);
         }
     }
     const connectWallet = async () => {

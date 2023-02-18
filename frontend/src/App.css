@@ -1,7 +1,9 @@
 body{
-  background-color: #82C3EC;
+  background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fin.ign.com%2Fcyberpunk-2077-1%2F163359%2Ffeature%2Fcyberpunk-2077-review-six-months-later-long-term-pc-amd-nvidia&psig=AOvVaw1h12iSlsLo4cvHmvm0Cg8u&ust=1676842808788000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCICp-LGEoP0CFQAAAAAdAAAAABAE');
+  /* background-color: #82C3EC; */
 }
 
+/*Navbar*/
 .main_nav {
   background-color: #301E67;
   color: #fff;
@@ -49,12 +51,17 @@ body{
   margin: 0;
 }
 
+/*Form Create*/
 .form-create {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 table {
@@ -63,39 +70,56 @@ table {
 }
 
 td {
-  padding: 10px;
-  font-weight: bold;
+  padding: 1rem;
+  font-size: 1.2rem;
 }
 
+input[type="file"],
 input[type="text"],
 input[type="date"],
+select,
 textarea {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
   width: 100%;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1rem;
 }
 
 select {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%234f4f4f' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position-x: calc(100% - 1rem);
+  background-position-y: center;
+  padding-right: 1rem;
 }
 
-button.form-submit {
-  background-color: #4CAF50;
+textarea {
+  resize: none;
+  height: 10rem;
+}
+
+.form-submit {
+  margin-top: 1rem;
+  background-color: #9b59b6;
   color: #fff;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: 0.5rem 1rem;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-button.form-submit:hover {
-  background-color: #3e8e41;
+.form-submit:hover {
+  background-color: #8e44ad;
 }
+
+/*Home Page*/
 .catagories {
   display: flex;
   justify-content: space-around;
@@ -160,34 +184,32 @@ button.form-submit:hover {
   background-color: #9553e6;
 }
 
+/* Style for the modal window */
 .modal-style {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.modal-style h1 {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 20px;
-}
-
-.donate {
-  background-color: #a756ff;
-  border: none;
-  border-radius: 4px;
+  padding: 2rem;
+  background-color: #2c3e50;
   color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Style for the donate button */
+.donate {
+  margin-top: 1rem;
+  background-color: #9b59b6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  font-size: 16px;
-  padding: 10px 20px;
-  margin-top: 20px;
+  transition: background-color 0.2s ease;
 }
 
 .donate:hover {
-  background-color: #9553e6;
+  background-color: #8e44ad;
 }

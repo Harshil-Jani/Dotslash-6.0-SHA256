@@ -1,4 +1,8 @@
+import { Web3Storage } from "web3.storage";
+import { getFilesFromPath } from "web3.storage";
+
 export default function () {
+    
     return (
         <div className="home">
             <h1>
