@@ -1,6 +1,6 @@
 export default function () {
     return (
-        <div class="form-create">
+        <div className="form-create">
             <table>
                 <tr>
                     <td>Image:</td>
@@ -38,7 +38,7 @@ export default function () {
                     <td><textarea placeholder="Write something about your discovery"></textarea></td>
                 </tr>
             </table>
-            <button class="form-submit">Submit</button>
+            <button className="form-submit">Submit</button>
         </div>
     )
 }

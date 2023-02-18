@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 const arms_and_armour = [
     {
         category: 'Item1',
@@ -92,81 +95,89 @@ const anthropology = [
     },
 ];
 export default function () {
-    const [expandedItem, setExpandedItem] = useState(null);
-
-    const handleExpand = (index) => {
-        setExpandedItem(index);
+    const [content, setContent] = useState(null);
+    const handleClick = (index, item) => {
+        setContent(JSON.stringify(item,null,4));
+        setOpen(true);
     }
+    const [open, setOpen] = useState(false);
 
-    const handleCollapse = () => {
-        setExpandedItem(null);
+    const closeModal = () => {
+        setOpen(false);
+    };
+
+    const handleDonation = () => {
+        console.log("Donated Bitch");
     }
-
     return (
         <div className='catagories'>
-            <h1>Arms and Armour</h1>
+            <h1 className='catagorie-heading'>Arms and Armour</h1>
+            <hr />
             <div className="arm-armour">
                 {arms_and_armour.map((item, index) => (
-                    <div key={index} className="card" onClick={() => handleExpand(index)}>
+                    <div key={index} className="card">
                         <img src={item.image} alt={item.category} />
                         <h2>{item.category}</h2>
-                        {expandedItem === index ? (
-                            <div>
-                                <p>{item.description}</p>
-                                <button onClick={() => handleCollapse()}>Close</button>
-                            </div>
-                        ) : null}
+                        <p>{item.description}</p>
+                        <button onClick={() => handleClick(index, item)}>View More</button>
                     </div>
                 ))}
             </div>
 
-            <h1>Anthropology</h1>
+            <h1 className='catagorie-heading'>Anthropology</h1>
+            <hr />
             <div className="anthropology">
-                {arms_and_armour.map((item, index) => (
-                    <div key={index} className="card" onClick={() => handleExpand(index)}>
+                {anthropology.map((item, index) => (
+                    <div key={index} className="card">
                         <img src={item.image} alt={item.category} />
                         <h2>{item.category}</h2>
-                        {expandedItem === index ? (
-                            <div>
-                                <p>{item.description}</p>
-                                <button onClick={() => handleCollapse()}>Close</button>
-                            </div>
-                        ) : null}
+                        <p>{item.description}</p>
+                        <button onClick={() => handleClick(index, item)}>View More</button>
                     </div>
                 ))}
             </div>
 
-            <h1>Manuscript</h1>
-            <div className="anthropology">
-                {arms_and_armour.map((item, index) => (
-                    <div key={index} className="card" onClick={() => handleExpand(index)}>
+            <h1 className='catagorie-heading'>Manuscript</h1>
+            <hr />
+            <div className="manuscript">
+                {manuscript.map((item, index) => (
+                    <div key={index} className="card">
                         <img src={item.image} alt={item.category} />
                         <h2>{item.category}</h2>
-                        {expandedItem === index ? (
-                            <div>
-                                <p>{item.description}</p>
-                                <button onClick={() => handleCollapse()}>Close</button>
-                            </div>
-                        ) : null}
+                        <p>{item.description}</p>
+                        <button onClick={() => handleClick(index, item)}>View More</button>
                     </div>
                 ))}
             </div>
 
-            <h1>Jewellery</h1>
-            <div className="anthropology">
-                {arms_and_armour.map((item, index) => (
-                    <div key={index} className="card" onClick={() => handleExpand(index)}>
+            <h1 className='catagorie-heading'>Jewellery</h1>
+            <hr />
+            <div className="jewellery">
+                {jewellery.map((item, index) => (
+                    <div key={index} className="card">
                         <img src={item.image} alt={item.category} />
                         <h2>{item.category}</h2>
-                        {expandedItem === index ? (
-                            <div>
-                                <p>{item.description}</p>
-                                <button onClick={() => handleCollapse()}>Close</button>
-                            </div>
-                        ) : null}
+                        <p>{item.description}</p>
+                        <button onClick={() => handleClick(index, item)}>View More</button>
                     </div>
                 ))}
             </div>
+            <Modal
+                open={open}
+                onClose={closeModal}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                
+            >
+                <Box className='modal-style'>
+                    <h1 id="modal-modal-title" variant="h6" component="h2">
+                        {/* {JSON.parse(content)?.image}
+                        {JSON.parse(content)?.description} */}
+                        {JSON.parse(content)?.category}
+                    </h1>
+                    <Button variant='contained' className='donate' onClick={handleDonation}>Donate</Button>
+                </Box>
+            </Modal>
         </div>
     );
 }
