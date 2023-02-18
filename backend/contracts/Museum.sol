@@ -19,12 +19,12 @@ contract Museum {
 
     uint256 public numberOfartifacts = 0;
 
-    function createartifact(address _owner, string memory _name, string memory _museum, string memory _title, string memory _description, string memory _image) public returns (uint256) {
+    function createartifact(string memory _name, string memory _museum, string memory _title, string memory _description, string memory _image) public returns (uint256) {
         Artifact storage artifact = artifacts[numberOfartifacts];
 
         // require(artifact.deadline < block.timestamp, "The deadline should be a date in the future.");
 
-        artifact.owner = _owner;
+        artifact.owner = msg.sender;
         artifact.name = _name;
         artifact.title = _title;
         artifact.description = _description;
