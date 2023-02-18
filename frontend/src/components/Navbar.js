@@ -2,38 +2,8 @@ import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 
 const getEthereumObject = () => window.ethereum;
-
-const findMetaMaskAccount = async () => {
-    try {
-      const ethereum = getEthereumObject();
-  
-      /*
-      * First make sure we have access to the Ethereum object.
-      */
-      if (!ethereum) {
-        console.error("Make sure you have Metamask!");
-        return null;
-      }
-  
-      console.log("We have the Ethereum object", ethereum);
-      const accounts = await ethereum.request({ method: "eth_accounts" });
-  
-      if (accounts.length !== 0) {
-        const account = accounts[0];
-        console.log("Found an authorized account:", account);
-        return account;
-      } else {
-        console.error("No authorized account found");
-        return null;
-      }
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  };
-
 const Navbar = () => {
-    const [currentAccount, setCurrentAccount] = useState("");
+    const [currentAccount, setCurrentAccount] = useState("Connect Wallet");
     const connectWallet = async () => {
         try {
             const ethereum = getEthereumObject();
@@ -55,11 +25,9 @@ const Navbar = () => {
         <div className="main_nav">
             <div className="nav_title">
                 <h1>Museum Artifact</h1>
-                {!currentAccount && (
-                    <button className="waveButton" onClick={connectWallet}>
-                        Connect Wallet
-                    </button>
-                )}
+                <button className="connect-wallet" onClick={connectWallet}>
+                    {currentAccount.includes("Connect")?<p>Connect Wallet</p>:currentAccount.slice(0, 6) + "..." + currentAccount.slice(36, 42)}
+                </button>
             </div>
         </div>
     );
