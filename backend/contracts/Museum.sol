@@ -22,6 +22,8 @@ contract Museum {
         uint256[] donations;
     }
 
+    event Donate(address acc1, address acc2, uint256 amt);
+    
     mapping(uint256 => Artifact) public artifacts;
 
     uint256 public numberOfartifacts = 0;
@@ -47,17 +49,19 @@ contract Museum {
         return numberOfartifacts - 1;
     }
 
-    function donateToartifact(uint256 _id) public payable returns(bool){
+    function donateToartifact() public payable returns(bool){
         // uint256 amount = msg.value;
-
+        // donateToartifact({value: amt})
         // Artifact storage artifact = artifacts[_id];
 
         // require(artifact.donations.length < 3);
         // artifact.donators.push(msg.sender);
         // artifact.donations.push(amount);
+        // let amount_gwei = new BigNumber.from(amount).shiftedBy(9);
         uint256 org_share = msg.value/2;
         payable(organzation).transfer(org_share);
         payable(museum_addr).transfer(org_share);
+        emit Donate(museum_addr, organzation, org_share);
 
         // (bool sent,) = payable(artifact.owner).call{value: amount}("");
 

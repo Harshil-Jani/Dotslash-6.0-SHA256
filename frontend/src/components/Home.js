@@ -50,8 +50,19 @@ export default function () {
         setOpen(false);
     };
 
-    const handleDonation = () => {
-        console.log("Donated Bitch");
+    const handleDonation = async() => {
+        const { ethereum } = window;
+        if (ethereum) {
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            const signer = provider.getSigner();
+            const artifactContract = new ethers.Contract("0x38F33B552a5992CcBd993e123d25A8De981479F9", abi.abi, signer);
+
+            // artifactContract.    createartifact("Ayush", "SVNIT Museum", "Contract Testing", "Description coming soon", "Lop");
+            //
+            const data = await artifactContract.donateToartifacts();
+            console.log(data[0].owner);
+            setArtifactData(data);
+        }
     }
 
     const artifact = async () => {
