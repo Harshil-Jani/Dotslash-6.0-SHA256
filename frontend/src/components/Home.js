@@ -32,15 +32,16 @@ export default function () {
     const [title, setTitle] = useState("");
     const [name, setName] = useState("");
     const [museum, setMuseum] = useState("");
-    const [owner, setOwner] = useState("");
+    // const [owner, setOwner] = useState("");
     const [description, setDescription] = useState("");
     const [artifactData, setArtifactData] = useState([]);
+    const [donationPrice, setDonationPrice] = useState(0);
 
     const handleClick = (index, item) => {
         setTitle(item.title);
         setName(item.name);
         setMuseum(item.museum);
-        setOwner(item.owner);
+        // setOwner(item.owner);
         setDescription(item.description);
         setOpen(true);
     }
@@ -51,7 +52,7 @@ export default function () {
     };
 
     const handleDonation = () => {
-        console.log("Donated Bitch");
+        console.log("Donated");
     }
 
     const artifact = async () => {
@@ -59,13 +60,23 @@ export default function () {
         if (ethereum) {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner();
-            const artifactContract = new ethers.Contract("0x38F33B552a5992CcBd993e123d25A8De981479F9", abi.abi, signer);
+            const artifactContract = new ethers.Contract("0xc701119B9386Ded2Ba09D378f02fc19dAD13d2b0", abi.abi, signer);
 
             // artifactContract.createartifact("Ayush", "SVNIT Museum", "Contract Testing", "Description coming soon", "Lop");
             //
             const data = await artifactContract.getartifacts();
-            console.log(data[0].owner);
             setArtifactData(data);
+        }
+    }
+
+    const donate = async () => {
+        const donateNumber = donationPrice.nativeEvent.data;
+        const { ethereum } = window;
+        if (ethereum) {
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            const signer = provider.getSigner();
+            const artifactContract = new ethers.Contract("0xc701119B9386Ded2Ba09D378f02fc19dAD13d2b0", abi.abi, signer);
+            artifactContract.donateToartifact({value: String(donateNumber*10e9), gasPrice:'2000000000'});
         }
     }
     useEffect(() => {
@@ -104,7 +115,9 @@ export default function () {
                     <h4>
                         {museum}
                     </h4>
-                    <Button variant='contained' className='donate' onClick={handleDonation}>Donate</Button>
+                   <b>Enter the Amount to Input </b> <input type="number" className='' onChange={(d) => setDonationPrice(d)}/>
+                   
+                    <Button variant='contained' className='donate' onClick={donate}>Donate</Button>
                 </Box>
             </Modal>
         </div>
