@@ -26,7 +26,7 @@ export default function () {
         if (ethereum) {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner();
-            const artifactContract = new ethers.Contract("0x38F33B552a5992CcBd993e123d25A8De981479F9", abi.abi, signer);
+            const artifactContract = new ethers.Contract("0xc701119B9386Ded2Ba09D378f02fc19dAD13d2b0", abi.abi, signer);
             artifactContract.createartifact(name, museum, title, description, image);
         }
     };

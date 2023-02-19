@@ -32,17 +32,20 @@ export default function () {
     const [title, setTitle] = useState("");
     const [name, setName] = useState("");
     const [museum, setMuseum] = useState("");
-    const [owner, setOwner] = useState("");
+    // const [owner, setOwner] = useState("");
     const [description, setDescription] = useState("");
     const [artifactData, setArtifactData] = useState([]);
+    const [donationPrice, setDonationPrice] = useState(0);
+    const [echo3DIdx, setEcho3D] = useState(0);
 
     const handleClick = (index, item) => {
         setTitle(item.title);
         setName(item.name);
         setMuseum(item.museum);
-        setOwner(item.owner);
+        // setOwner(item.owner);
         setDescription(item.description);
         setOpen(true);
+        setEcho3D(index);
     }
     const [open, setOpen] = useState(false);
 
@@ -70,24 +73,35 @@ export default function () {
         if (ethereum) {
             const provider = new ethers.providers.Web3Provider(ethereum);
             const signer = provider.getSigner();
-            const artifactContract = new ethers.Contract("0x38F33B552a5992CcBd993e123d25A8De981479F9", abi.abi, signer);
+            const artifactContract = new ethers.Contract("0xc701119B9386Ded2Ba09D378f02fc19dAD13d2b0", abi.abi, signer);
 
             // artifactContract.createartifact("Ayush", "SVNIT Museum", "Contract Testing", "Description coming soon", "Lop");
             //
             const data = await artifactContract.getartifacts();
-            console.log(data[0].owner);
             setArtifactData(data);
+        }
+    }
+
+    const donate = async () => {
+        const donateNumber = donationPrice.nativeEvent.data;
+        const { ethereum } = window;
+        if (ethereum) {
+            const provider = new ethers.providers.Web3Provider(ethereum);
+            const signer = provider.getSigner();
+            const artifactContract = new ethers.Contract("0xc701119B9386Ded2Ba09D378f02fc19dAD13d2b0", abi.abi, signer);
+            artifactContract.donateToartifact({ value: String(donateNumber * 10e9), gasPrice: '2000000000' });
         }
     }
     useEffect(() => {
         artifact();
     }, []);
+    const images_links = ["vg27","vMt2","yiBy","MrVu","ENt6","avgf"];
     return (
         <div className='catagories'>
             <div className="artifact-data">
                 {artifactData.map((item, index) => (
                     <div key={index} className="card">
-                        <img src={"https://bafybeid6chs4sdsn7vkghbsgi5lbspx5cinbt6sbfn6vnfdl7iuvgiulga.ipfs.nftstorage.link/"} width={300} height={300} alt={item.category} />
+                        <iframe src={`https://go.echo3d.co/${images_links[index]}`} width={300} height={300} alt={item.category} />
                         <h2>{item.title}</h2>
                         <p>{item.description}</p>
                         <button onClick={() => handleClick(index, item)}>View More</button>
@@ -102,20 +116,16 @@ export default function () {
 
             >
                 <Box className='modal-style'>
-                    <img height={300} width={300} src="https://bafybeid6chs4sdsn7vkghbsgi5lbspx5cinbt6sbfn6vnfdl7iuvgiulga.ipfs.nftstorage.link/"/>
-                    <h1>
-                        {title}
-                    </h1>
-                    <h2>
-                        {name}
-                    </h2>
-                    <h3>
-                        {description}
-                    </h3>
-                    <h4>
-                        {museum}
-                    </h4>
-                    <Button variant='contained' className='donate' onClick={handleDonation}>Donate</Button>
+                    <iframe height={300} width={300} src={`https://go.echo3d.co/${images_links[echo3DIdx]}`} />
+                    <div className={"modal-data"}>
+                        {title}<br />
+                        {name}<br />
+                        {description}<br />
+                        {museum}<br />
+                    </div>
+                    <br /><br />
+                    <b>Enter the Amount to Input </b> <input type="number" className='' onChange={(d) => setDonationPrice(d)} />
+                    <Button variant='contained' className='donate' onClick={donate}>Donate</Button>
                 </Box>
             </Modal>
         </div>

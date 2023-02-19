@@ -2,7 +2,86 @@
     "_format": "hh-sol-artifact-1",
     "contractName": "Museum",
     "sourceName": "contracts/Museum.sol",
-    "abi": [
+    "abi":[
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "acc1",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "acc2",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "amt",
+            "type": "uint256"
+          }
+        ],
+        "name": "Donate",
+        "type": "event"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "artifacts",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "museum",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "museum_amtCollected",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "org_amtCollected",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "image",
+            "type": "string"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
       {
         "inputs": [
           {
@@ -43,15 +122,15 @@
         "type": "function"
       },
       {
-        "inputs": [
+        "inputs": [],
+        "name": "donateToartifact",
+        "outputs": [
           {
-            "internalType": "uint256",
-            "name": "_id",
-            "type": "uint256"
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
           }
         ],
-        "name": "donateToartifact",
-        "outputs": [],
         "stateMutability": "payable",
         "type": "function"
       },
@@ -59,46 +138,59 @@
         "inputs": [
           {
             "internalType": "uint256",
+            "name": "_id",
+            "type": "uint256"
+          }
+        ],
+        "name": "getBalance_museum",
+        "outputs": [
+          {
+            "internalType": "uint256",
             "name": "",
             "type": "uint256"
           }
         ],
-        "name": "artifacts",
-        "outputs": [
-          {
-            "internalType": "address",
-            "name": "owner",
-            "type": "address"
-          },
-          {
-            "internalType": "string",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "museum",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "title",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "description",
-            "type": "string"
-          },
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
           {
             "internalType": "uint256",
-            "name": "amountCollected",
+            "name": "_id",
             "type": "uint256"
+          }
+        ],
+        "name": "getBalance_org",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_id",
+            "type": "uint256"
+          }
+        ],
+        "name": "getDonators",
+        "outputs": [
+          {
+            "internalType": "address[]",
+            "name": "",
+            "type": "address[]"
           },
           {
-            "internalType": "string",
-            "name": "image",
-            "type": "string"
+            "internalType": "uint256[]",
+            "name": "",
+            "type": "uint256[]"
           }
         ],
         "stateMutability": "view",
@@ -137,7 +229,12 @@
               },
               {
                 "internalType": "uint256",
-                "name": "amountCollected",
+                "name": "museum_amtCollected",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "org_amtCollected",
                 "type": "uint256"
               },
               {
@@ -165,24 +262,13 @@
         "type": "function"
       },
       {
-        "inputs": [
-          {
-            "internalType": "uint256",
-            "name": "_id",
-            "type": "uint256"
-          }
-        ],
-        "name": "getDonators",
+        "inputs": [],
+        "name": "museum_addr",
         "outputs": [
           {
-            "internalType": "address[]",
+            "internalType": "address",
             "name": "",
-            "type": "address[]"
-          },
-          {
-            "internalType": "uint256[]",
-            "name": "",
-            "type": "uint256[]"
+            "type": "address"
           }
         ],
         "stateMutability": "view",
@@ -196,6 +282,19 @@
             "internalType": "uint256",
             "name": "",
             "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "organzation",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
           }
         ],
         "stateMutability": "view",
