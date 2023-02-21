@@ -1,9 +1,11 @@
 # Museum Artifact MartketPlace
 
-**Replit_demo** : https://dotslash-60-sha256.harshil2002.repl.co/
+**Replit_Demo** : https://dotslash-60-sha256.harshil2002.repl.co/
+
+**Video_Demo** : https://www.youtube.com/watch?v=8MDeHWEOQa8
 
 ## Tagline
-Experience the with cutting-edge technology: Blockchain and Augmented Reality in the Digital Museum Marketplace - Ensuring Security to Archaeologists
+Experience the Artifacts with cutting-edge technology: Blockchain and Augmented Reality in the Digital Museum Marketplace. Ensuring Security to Archaeologists
 
 
 
